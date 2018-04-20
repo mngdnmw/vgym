@@ -2,7 +2,9 @@
 <?php include 'templates/header.php'; ?>
 <section id="plan_details">
     <div class="container">
-        <h5 class="section-title h1">Paul's Plan</h5>
+        <h5 class="section-title h1"> <?php
+            echo $_GET["plan"];
+            ?></h5>
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-6 col-lg-8">
                 <div class="card">

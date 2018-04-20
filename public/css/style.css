@@ -21,6 +21,7 @@
 
 section {
     padding: 60px 0;
+    height: 100vh;
 }
 
 section .section-title {
@@ -30,10 +31,17 @@ section .section-title {
     text-transform: uppercase;
 }
 
-#team .card {
+#plans .card {
     border: none;
     background: #ffffff;
 }
+
+.card-padding
+{
+    padding-right: 2em;
+    padding-left: 2em;
+}
+
 
 .image-flip:hover .backside,
 .image-flip.hover .backside {
