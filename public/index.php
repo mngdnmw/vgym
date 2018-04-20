@@ -1,6 +1,8 @@
-<?php
-try {
 
+<?php
+
+try {
+    require "../install.php";
     require "../config.php";
     $connection = new PDO($dsn, $username, $password, $options);
     $sql = "SELECT * FROM plan";
@@ -17,7 +19,6 @@ try {
     <div class="container">
         <h5 class="section-title h1">PLAN OVERVIEW</h5>
         <div class="row">
-
             <?php foreach ($result as $row) { ?>
                 <div class="col-xs-12 col-sm-6 col-md-4">
                     <div class="image-flip" ontouchstart="this.classList.toggle('hover');">

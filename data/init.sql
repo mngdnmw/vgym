@@ -76,6 +76,11 @@ CREATE TABLE IF NOT EXISTS `plan` (
 
 INSERT INTO `plan` (`id`, `plan_name`, `plan_description`, `plan_difficulty`) VALUES
 (1, 'My first plan', 'Just a dummy :-)', 1);
+INSERT INTO `plan` (`id`, `plan_name`, `plan_description`, `plan_difficulty`) VALUES
+(2, 'Paul\'s Plan', 'Stuff that Paul wants to do', 3);
+INSERT INTO `plan` (`id`, `plan_name`, `plan_description`, `plan_difficulty`) VALUES
+(3, 'Matt\'s Plan', 'Stuff that Matt wants to do', 3);
+
 
 -- --------------------------------------------------------
 
