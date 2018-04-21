@@ -1,5 +1,6 @@
-<!doctype html>
-<?php include 'templates/header.php'; ?>
+<?php
+require_once "../private/install.php";
+include TEMPLATE_PATH . '/header.php'; ?>
 <section id="plan_details">
     <div class="container">
         <h5 class="section-title h1"> <?php
@@ -30,4 +31,4 @@
     </div>
     </div>
 </section>
-<?php include 'templates/footer.php'; ?>
+<?php include TEMPLATE_PATH . '/footer.php'; ?>
