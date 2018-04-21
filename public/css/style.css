@@ -31,6 +31,10 @@ section .section-title {
     text-transform: uppercase;
 }
 
+ul.list-group.day-group{
+    margin-bottom: 10px;
+}
+
 #plans .card {
     border: none;
     background: #ffffff;

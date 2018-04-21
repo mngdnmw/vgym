@@ -1,3 +1,6 @@
+<?php
+if(!isset($page_title)) { $page_title = 'Staff Area'; }
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,8 +16,6 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
-
-
-    <title>Plan Overview</title>
+    <title><?php echo $page_title; ?></title>
 </head>
 <body>

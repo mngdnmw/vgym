@@ -1,13 +1,15 @@
 <?php
+$page_title = "Plan Overview";
 require_once "../private/install.php";
 include TEMPLATE_PATH . '/header.php';
 ?>
 <section id="plans">
     <div class="container">
-        <h5 class="section-title h1">PLAN OVERVIEW</h5>
+        <div class="section-title h1"><?php echo $page_title ?>
+            <a href="" class="btn btn-primary btn-sm" style="float: right;"><i class="fas fa-plus"></i></a>
+        </div>
         <div class="row">
             <?php
-
             try {
                 $connection = new PDO($dsn, $username, $password, $options);
                 $sql = "SELECT * FROM plan";
@@ -19,6 +21,7 @@ include TEMPLATE_PATH . '/header.php';
                 echo $sql . "<br>" . $error->getMessage();
             }
             foreach ($plan_result as $plan_row) { ?>
+
                 <div class="col-xs-12 col-sm-6 col-md-4 card-padding">
                     <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
                         <div class="mainflip">
@@ -43,16 +46,26 @@ include TEMPLATE_PATH . '/header.php';
                                         $day_statement->execute();
                                         $day_result = $day_statement->fetchAll();
                                         ?>
-                                        <ul class="list-group">
+                                        <ul class="list-group day-group">
                                             <?php
-                                            foreach ($day_result as $row) {
-                                                echo '<li class="list-group-item">' . $row['day_name'] . '</li>';
-                                            }
-                                            ?>
+                                            foreach ($day_result as $row) { ?>
+                                                <li class="list-group-item"><?php echo $row['day_name'] ?></li>
+                                            <?php } ?>
                                         </ul>
-                                        <a href="plan_detail.php?plan=<?php echo $plan_row["id"]; ?>"
-                                           class="btn btn-primary btn-sm"><i
-                                                    class="fas fa-edit"></i></a>
+                                        <?php
+                                        if ($day_result && $day_statement->rowCount() > 0) { ?>
+                                            <a href="plan_detail.php?plan=<?php echo $plan_row["id"]; ?>"
+                                               class="btn btn-primary btn-sm"><i
+                                                        class="fas fa-edit"></i></a>
+                                            <a href="plan_detail.php?plan=<?php echo $plan_row["id"]; ?>"
+                                               class="btn btn-primary btn-sm"><i
+                                                        class="fas fa-trash"></i></a>
+                                        <?php } else { ?>
+                                            <p>No workout days added</p>
+                                            <a href="plan_detail.php?plan=<?php echo $plan_row["id"]; ?>"
+                                               class="btn btn-primary btn-sm"><i
+                                                        class="fas fa-plus"></i></a>
+                                        <?php } ?>
                                     </div>
                                 </div>
                             </div>
