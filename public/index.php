@@ -1,6 +1,6 @@
 <?php
 require_once "../private/install.php";
-include TEMPLATE_PATH.'/header.php';
+include TEMPLATE_PATH . '/header.php';
 ?>
 <section id="plans">
     <div class="container">
@@ -27,7 +27,8 @@ include TEMPLATE_PATH.'/header.php';
                                     <div class="card-body text-center">
                                         <h4 class="card-title"><?php echo $plan_row["plan_name"]; ?></h4>
                                         <p><?php echo $plan_row["plan_description"]; ?></p>
-                                        <p><b><i>Plan difficulty:</i></b> <?php echo $plan_row["plan_difficulty"]; ?></p>
+                                        <p><b><i>Plan difficulty:</i></b> <?php echo $plan_row["plan_difficulty"]; ?>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -37,18 +38,20 @@ include TEMPLATE_PATH.'/header.php';
                                         <?php
                                         $sql = "SELECT * FROM plan_days WHERE plan_id = :plan_id ORDER BY `order`";
                                         $plan_id = $plan_row['id'];
-                                        $statement = $connection->prepare($sql);
-                                        $statement->bindParam(':plan_id', $plan_id, PDO::PARAM_STR);
-                                        $statement->execute();
-                                        $result = $statement->fetchAll();
-
-                                        foreach ($result as $row)
-
+                                        $day_statement = $connection->prepare($sql);
+                                        $day_statement->bindParam(':plan_id', $plan_id, PDO::PARAM_STR);
+                                        $day_statement->execute();
+                                        $day_result = $day_statement->fetchAll();
                                         ?>
                                         <ul class="list-group">
-                                            <li class="list-group-item"><?php echo $row["day_name"]?></li>
+                                            <?php
+                                            foreach ($day_result as $row) {
+                                                echo '<li class="list-group-item">' . $row['day_name'] . '</li>';
+                                            }
+                                            ?>
                                         </ul>
-                                        <a href="plan_detail.php?plan=<?php echo $plan_row["id"];?>" class="btn btn-primary btn-sm"><i
+                                        <a href="plan_detail.php?plan=<?php echo $plan_row["id"]; ?>"
+                                           class="btn btn-primary btn-sm"><i
                                                     class="fas fa-edit"></i></a>
                                     </div>
                                 </div>
@@ -60,4 +63,4 @@ include TEMPLATE_PATH.'/header.php';
         </div>
     </div>
 </section>
-<?php include TEMPLATE_PATH.'/footer.php'; ?>
+<?php include TEMPLATE_PATH . '/footer.php'; ?>
