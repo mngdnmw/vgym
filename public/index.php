@@ -2,6 +2,7 @@
 $page_title = "Plan Overview";
 require_once "../private/install.php";
 include TEMPLATE_PATH . '/header.php';
+include PRIVATE_PATH . '/functions.php';
 ?>
 <section id="plans">
     <div class="container">
@@ -18,7 +19,7 @@ include TEMPLATE_PATH . '/header.php';
                 $plan_result = $plan_statement->fetchAll();
 
             } catch (PDOException $error) {
-                echo '<script>console.log("'. $error->getMessage().'")</script>';
+                echo '<script>console.log("' . $error->getMessage() . '")</script>';
             }
             foreach ($plan_result as $plan_row) { ?>
 
@@ -39,12 +40,7 @@ include TEMPLATE_PATH . '/header.php';
                                 <div class="card">
                                     <div class="card-body text-center mt-4">
                                         <?php
-                                        $sql = "SELECT * FROM plan_days WHERE plan_id = :plan_id ORDER BY `order`";
-                                        $plan_id = $plan_row['id'];
-                                        $day_statement = $connection->prepare($sql);
-                                        $day_statement->bindParam(':plan_id', $plan_id, PDO::PARAM_STR);
-                                        $day_statement->execute();
-                                        $day_result = $day_statement->fetchAll();
+                                        $day_result = get_workout_days($connection, $plan_row['id']);
                                         ?>
                                         <ul class="list-group day-group">
                                             <?php
@@ -53,7 +49,7 @@ include TEMPLATE_PATH . '/header.php';
                                             <?php } ?>
                                         </ul>
                                         <?php
-                                        if ($day_result && $day_statement->rowCount() > 0) { ?>
+                                        if ($day_result && $GLOBALS['day_row_count'] > 0) { ?>
                                             <a href="plan_detail.php?plan=<?php echo $plan_row["id"]; ?>"
                                                class="btn btn-primary btn-sm"><i
                                                         class="fas fa-edit"></i></a>
