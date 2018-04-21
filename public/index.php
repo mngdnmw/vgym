@@ -18,7 +18,7 @@ include TEMPLATE_PATH . '/header.php';
                 $plan_result = $plan_statement->fetchAll();
 
             } catch (PDOException $error) {
-                echo $sql . "<br>" . $error->getMessage();
+                echo '<script>console.log("'. $error->getMessage().'")</script>';
             }
             foreach ($plan_result as $plan_row) { ?>
 

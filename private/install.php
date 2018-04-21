@@ -16,6 +16,6 @@ try {
     $connection->exec($sql);
     echo "Database and table users created successfully.";
 } catch (PDOException $error) {
-    //echo $sql . "<br>" . $error->getMessage();
+    echo '<script>console.log("'. $error->getMessage().'")</script>';
 }
 ?>
