@@ -1,8 +1,17 @@
 <?php
 
+function get_all_workouts($connection)
+{
+    $sql = "SELECT * FROM plan";
+    $plan_statement = $connection->prepare($sql);
+    $plan_statement->execute();
+    $plan_result = $plan_statement->fetchAll();
+    return $plan_result;
 
+}
 
-function get_workout_days($connection, $plan_id){
+function get_workout_days($connection, $plan_id)
+{
     $sql = "SELECT * FROM plan_days WHERE plan_id = :plan_id ORDER BY `order`";
     $day_statement = $connection->prepare($sql);
     $day_statement->bindParam(':plan_id', $plan_id, PDO::PARAM_STR);

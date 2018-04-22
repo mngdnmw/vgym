@@ -2,7 +2,7 @@
 $page_title = "Plan Overview";
 require_once "../private/install.php";
 include TEMPLATE_PATH . '/header.php';
-include PRIVATE_PATH . '/functions.php';
+include PRIVATE_PATH . '/query_functions.php';
 ?>
 <section id="plans">
     <div class="container">
@@ -13,10 +13,7 @@ include PRIVATE_PATH . '/functions.php';
             <?php
             try {
                 $connection = new PDO($dsn, $username, $password, $options);
-                $sql = "SELECT * FROM plan";
-                $plan_statement = $connection->prepare($sql);
-                $plan_statement->execute();
-                $plan_result = $plan_statement->fetchAll();
+                $plan_result = get_all_workouts($connection);
 
             } catch (PDOException $error) {
                 echo '<script>console.log("' . $error->getMessage() . '")</script>';
