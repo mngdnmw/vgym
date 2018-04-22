@@ -22,4 +22,23 @@ function get_workout_days($connection, $plan_id)
 }
 
 
+function delete_workout($connection, $plan_id)
+{
+    $sql = "DELETE FROM plan WHERE id =: plan_id ";
+    $sql .= "LIMIT 1";
+    $delete_statement = $connection->prepare($sql);
+    $delete_statement->bindParam(':plan_id', $plan_id, PDO::PARAM_STR);
+    $delete_statement->execute();
+    $delete_result = $delete_statement->fetchAll();
+
+    if ($delete_result) {
+        echo '<script>console.log("deleted plan!")</script>';
+        return true;
+    } else {
+        echo '<script>console.log("Could not delete plan!")</script>';
+        return false;
+    }
+
+}
+
 ?>

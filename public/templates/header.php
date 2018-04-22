@@ -1,5 +1,7 @@
 <?php
-if(!isset($page_title)) { $page_title = 'Staff Area'; }
+if (!isset($page_title)) {
+    $page_title = 'Staff Area';
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -17,5 +19,18 @@ if(!isset($page_title)) { $page_title = 'Staff Area'; }
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
     <title><?php echo $page_title; ?></title>
+
+
+    <script type="text/javascript">
+        function confirmation($warning_string, $form) {
+            let answer = confirm($warning_string);
+            if (answer) {
+                $form.submit();
+            }
+            else {
+                alert("Cancelled the delete!")
+            }
+        }
+    </script>
 </head>
 <body>
