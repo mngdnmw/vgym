@@ -17,7 +17,7 @@ function get_all_workouts($connection)
 function get_workout_days($connection, $plan_id)
 {
     try {
-        $sql = "SELECT * FROM plan_days WHERE plan_id = :plan_id ORDER BY `order`";
+        $sql = "SELECT * FROM plan_days WHERE plan_id =:plan_id ORDER BY `order`";
         $day_statement = $connection->prepare($sql);
         $day_statement->bindParam(':plan_id', $plan_id, PDO::PARAM_STR);
         $day_statement->execute();
@@ -33,20 +33,21 @@ function get_workout_days($connection, $plan_id)
 function delete_workout($connection, $plan_id)
 {
     try {
-        $sql = "DELETE FROM plan WHERE id =: plan_id ";
+        $sql = "DELETE FROM plan WHERE id =:plan_id ";
         $sql .= "LIMIT 1";
         $delete_statement = $connection->prepare($sql);
         $delete_statement->bindParam(':plan_id', $plan_id, PDO::PARAM_INT);
         $delete_statement->execute();
-        $delete_result = $delete_statement->fetchAll();
-
-        if ($delete_result) {
+        $count = $delete_statement->rowCount();
+        if($count>0)
+        {
             echo '<script>console.log("deleted plan!")</script>';
             return true;
-        } else {
+        }else{
             echo '<script>console.log("Could not delete plan!")</script>';
             return false;
         }
+
 
     } catch (PDOException $error) {
         echo '<script>console.log("' . $error->getMessage() . '")</script>';

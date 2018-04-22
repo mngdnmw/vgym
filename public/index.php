@@ -1,6 +1,8 @@
 <?php
-$page_title = "Plan Overview";
+
 require_once "../private/install.php";
+
+$page_title = "Plan Overview";
 include TEMPLATE_PATH . '/header.php';
 include PRIVATE_PATH . '/query_functions.php';
 

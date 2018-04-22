@@ -14,7 +14,7 @@ try {
     $connection = new PDO("mysql:host=$host", $username, $password, $options);
     $sql = file_get_contents(PRIVATE_PATH . "/data/init.sql");
     $connection->exec($sql);
-    echo "Database and table users created successfully.";
+    echo '<script>console.log("DB successfully initalised")</script>';
 } catch (PDOException $error) {
     echo '<script>console.log("'. $error->getMessage().'")</script>';
 }

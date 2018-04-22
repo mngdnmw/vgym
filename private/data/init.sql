@@ -2,11 +2,9 @@
 -- Creating database
 --
 
-CREATE DATABASE vgym;
+CREATE DATABASE vgym2;
 
-use vgym;
-
--- --------------------------------------------------------
+use vgym2;-- --------------------------------------------------------
 
 --
 -- Table structure for table `exercise`
@@ -74,11 +72,8 @@ CREATE TABLE IF NOT EXISTS `plan` (
 -- Data is exported for table `plan`
 --
 
-INSERT INTO `plan` ('plan_name`, `plan_description`, `plan_difficulty`) VALUES
-('My first plan', 'Just a dummy :-)', 1),
-('Paul\'s Plan', 'Stuff that Paul wants to do', 3),
-('Matt\'s Plan', 'Stuff that Matt wants to do', 3);
-
+INSERT INTO `plan` (`id`, `plan_name`, `plan_description`, `plan_difficulty`) VALUES
+(1, 'My first plan', 'Just a dummy :-)', 1);
 
 -- --------------------------------------------------------
 
