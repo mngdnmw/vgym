@@ -46,10 +46,8 @@ function delete_workout($connection, $plan_id)
         $delete_statement->execute();
         $count = $delete_statement->rowCount();
         if ($count > 0) {
-            echo '<script>console.log("deleted plan!")</script>';
             return true;
         } else {
-            echo '<script>console.log("Could not delete plan!")</script>';
             return false;
         }
 

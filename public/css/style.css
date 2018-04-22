@@ -1,141 +1,75 @@
-/* FontAwesome for working BootSnippet :> */
-
-@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-#plans {
-    background: #eee !important;
-}
-
-.btn-primary:hover,
-.btn-primary:focus {
-    background-color: #108d6f;
-    border-color: #108d6f;
-    box-shadow: none;
-    outline: none;
-}
-
-.btn-primary {
-    color: #fff;
-    background-color: #007b5e;
-    border-color: #007b5e;
-}
-
-section {
-    padding: 60px 0;
-    height: 100vh;
-}
-
-section .section-title {
-    text-align: center;
-    color: #007b5e;
-    margin-bottom: 50px;
-    text-transform: uppercase;
-}
-
-ul.list-group.day-group{
-    margin-bottom: 10px;
-}
-
-#plans .card {
-    border: none;
-    background: #ffffff;
-}
-
-.card-padding
-{
-    padding-right: 2em;
-    padding-left: 2em;
-}
-
-
-.image-flip:hover .backside,
-.image-flip.hover .backside {
-    -webkit-transform: rotateY(0deg);
-    -moz-transform: rotateY(0deg);
-    -o-transform: rotateY(0deg);
-    -ms-transform: rotateY(0deg);
-    transform: rotateY(0deg);
-    border-radius: .25rem;
-}
-
-.image-flip:hover .frontside,
-.image-flip.hover .frontside {
-    -webkit-transform: rotateY(180deg);
-    -moz-transform: rotateY(180deg);
-    -o-transform: rotateY(180deg);
-    transform: rotateY(180deg);
-}
-
-.mainflip {
-    -webkit-transition: 1s;
-    -webkit-transform-style: preserve-3d;
-    -ms-transition: 1s;
-    -moz-transition: 1s;
-    -moz-transform: perspective(1000px);
-    -moz-transform-style: preserve-3d;
-    -ms-transform-style: preserve-3d;
-    transition: 1s;
-    transform-style: preserve-3d;
-    position: relative;
-}
-
-.frontside {
-    position: relative;
-    -webkit-transform: rotateY(0deg);
-    -ms-transform: rotateY(0deg);
-    z-index: 2;
-    margin-bottom: 30px;
-}
-
-.backside {
-    position: absolute;
-    top: 0;
-    left: 0;
+.card {
     background: white;
-    -webkit-transform: rotateY(-180deg);
-    -moz-transform: rotateY(-180deg);
-    -o-transform: rotateY(-180deg);
-    -ms-transform: rotateY(-180deg);
-    transform: rotateY(-180deg);
-    -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
-    -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
-    box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+    margin-bottom: 2em;
 }
 
-.frontside,
-.backside {
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -ms-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-transition: 1s;
-    -webkit-transform-style: preserve-3d;
-    -moz-transition: 1s;
-    -moz-transform-style: preserve-3d;
-    -o-transition: 1s;
-    -o-transform-style: preserve-3d;
-    -ms-transition: 1s;
-    -ms-transform-style: preserve-3d;
-    transition: 1s;
-    transform-style: preserve-3d;
+.card-content {
+    padding: 1.4em;
+    text-align: center;
 }
 
-.frontside .card,
-.backside .card {
-    min-height: 112px;
-    min-width: 300px;
+/* Flexbox  */
+
+@media screen and (min-width: 40em) {
+    .cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: -1em;
+    }
+
+    .card {
+        display: flex;
+        flex: 0 1 calc(50% - .5em);
+        margin-bottom: 1em;
+    }
 }
 
-.backside .card a {
-    font-size: 18px;
+@media screen and (min-width: 60em) {
+    .cards {
+        margin-top: inherit;
+    }
+
+    .card {
+        flex: 0 1 calc(25% - 1em);
+        margin-bottom: 2em;
+    }
 }
 
-.frontside .card .card-title,
-.backside .card .card-title {
-    color: #007b5e !important;
+.centered {
+    margin: 0 auto;
+    padding: 0 1em;
 }
 
-.frontside .card .card-body img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
+@media screen and (min-width: 52em) {
+    .centered {
+        max-width: 52em;
+    }
 }
+
+.jumbotron {
+    color: orange;
+    text-align: center;
+}
+
+.button-row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn.btn-primary.btn-sm{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+
+
+
+
+
+
+
+
+
+
