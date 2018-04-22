@@ -4,11 +4,12 @@ require_once "../private/install.php";
 include TEMPLATE_PATH . '/header.php';
 include PRIVATE_PATH . '/query_functions.php';
 
-if (isset($_POST['submit'])) {
+$connection = new PDO($dsn, $username, $password, $options);
+
+if (isset($_POST['delete'])) {
 
     $plan_id = $_POST['id'];
     delete_workout($connection, $plan_id);
-
 
 }
 ?>
@@ -19,13 +20,7 @@ if (isset($_POST['submit'])) {
         </div>
         <div class="row">
             <?php
-            try {
-                $connection = new PDO($dsn, $username, $password, $options);
-                $plan_result = get_all_workouts($connection);
-
-            } catch (PDOException $error) {
-                echo '<script>console.log("' . $error->getMessage() . '")</script>';
-            }
+            $plan_result = get_all_workouts($connection);
             foreach ($plan_result as $plan_row) { ?>
 
                 <div class="col-xs-12 col-sm-6 col-md-4 card-padding">
@@ -44,7 +39,7 @@ if (isset($_POST['submit'])) {
                             <div class="backside">
                                 <div class="card">
                                     <div class="card-body ">
-                                        <div class="row text-center mt-4" >
+                                        <div class="row text-center mt-4">
                                             <?php
                                             $day_result = get_workout_days($connection, $plan_row['id']);
                                             ?>
@@ -70,7 +65,7 @@ if (isset($_POST['submit'])) {
                                             <form method="post">
                                                 <input type="hidden" value="<?php echo $plan_row["id"]; ?>" name="id">
                                                 <button type="submit"
-                                                        name="submit"
+                                                        name="delete"
                                                         class="btn btn-primary btn-sm"
                                                         onclick="return confirm('Are you sure you want to delete this plan?')">
                                                     <i class="fas fa-trash"></i></button>
