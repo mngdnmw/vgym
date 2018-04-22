@@ -52,15 +52,29 @@
     text-align: center;
 }
 
-.button-row{
+.button-row {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.btn.btn-primary.btn-sm{
-    margin-left: 5px;
-    margin-right: 5px;
+.btn.btn-primary.btn-sm,
+.btn.btn-warning.btn-sm
+{
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-back{
+    background-color: gray;
+    outline-color: gray;
+    border-color: gray;
 }
 
 
