@@ -96,4 +96,17 @@ function delete_workout($connection, $plan_id)
 
 }
 
+function get_all_exercises($connection){
+
+    $sql = "SELECT * ";
+    $sql .= "FROM `exercise` ";
+    $sql .= "ORDER BY `id`;";
+    $exercise_statement = $connection->prepare($sql);
+    $exercise_statement->execute();
+    $exercise_result = $exercise_statement->fetchAll();
+
+    return $exercise_result;
+
+}
+
 ?>

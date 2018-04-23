@@ -24,7 +24,7 @@ include TEMPLATE_PATH . '/header.php';
             </div>
             <div class="col">
                 <button
-                        class="btn btn-success"><i
+                        class="btn btn-success" id="add-new-day"><i
                             class="fas fa-plus"></i></button>
             </div>
         </div>
