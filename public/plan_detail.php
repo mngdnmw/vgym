@@ -1,9 +1,15 @@
 <?php
-$page_title = "Plan Details";
+
 require_once "../private/install.php";
 include PRIVATE_PATH . '/query_functions.php';
-include TEMPLATE_PATH . '/header.php';
+
 $connection = new PDO($dsn, $username, $password, $options);
+$plan = get_plan($connection, $_GET['plan']);
+
+foreach ($plan as $first_plan) {
+    $page_title = $first_plan['plan_name'];
+}
+include TEMPLATE_PATH . '/header.php';
 ?>
 <header>
     <div class="jumbotron">
@@ -14,12 +20,12 @@ $connection = new PDO($dsn, $username, $password, $options);
                             class="fas fa-chevron-left"></i></a>
             </div>
             <div class="col">
-                <h1 class="site-title"><?php echo $page_title ?></h1>
+                <h1 class="site-title"><?php echo $page_title?></h1>
             </div>
             <div class="col">
-                <a href="create_plan.php"
-                   class="btn btn-success><i
-                            class="fas fa-plus"></i></a>
+                <button
+                        class="btn btn-success"><i
+                            class="fas fa-plus"></i></button>
             </div>
         </div>
     </div>
@@ -38,7 +44,7 @@ $connection = new PDO($dsn, $username, $password, $options);
                     </article>
                 <?php }
             } else { ?>
-                <p>No plans found</p>
+                <p>No exercises found</p>
             <?php } ?>
         </section>
     </div>

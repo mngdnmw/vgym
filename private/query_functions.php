@@ -15,15 +15,33 @@ function get_all_workouts($connection)
 
 }
 
+function get_plan($connection, $plan_id)
+{
+    try {
+        $sql = "SELECT * ";
+        $sql .= "FROM `plan` ";
+        $sql .= "WHERE id =:plan_id ";
+        $sql .= "LIMIT 1";
+        $plan_statement = $connection->prepare($sql);
+        $plan_statement->bindParam(':plan_id', $plan_id, PDO::PARAM_INT);
+        $plan_statement->execute();
+        $plan_result = $plan_statement->fetchAll();
+        return $plan_result;
+    } catch (PDOException $error) {
+        echo '<script>console.log("' . $error->getMessage() . '")</script>';
+    }
+}
+
+
 function get_workout_days($connection, $plan_id)
 {
     try {
         $sql = "SELECT * ";
         $sql .= "FROM `plan_days` ";
-        $sql .="WHERE plan_id =:plan_id ";
-        $sql .="ORDER BY `order`;";
+        $sql .= "WHERE plan_id =:plan_id ";
+        $sql .= "ORDER BY `order`;";
         $day_statement = $connection->prepare($sql);
-        $day_statement->bindParam(':plan_id', $plan_id, PDO::PARAM_STR);
+        $day_statement->bindParam(':plan_id', $plan_id, PDO::PARAM_INT);
         $day_statement->execute();
         $day_result = $day_statement->fetchAll();
         return $day_result;

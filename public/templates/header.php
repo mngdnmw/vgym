@@ -1,6 +1,6 @@
 <?php
 if (!isset($page_title)) {
-    $page_title = 'Staff Area';
+    $page_title = 'VGYM';
 }
 ?>
 <!doctype html>
