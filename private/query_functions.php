@@ -50,6 +50,26 @@ function get_workout_days($connection, $plan_id)
     }
 }
 
+function get_exercise_instances($connection, $day_id)
+{
+    try {
+        $sql = "SELECT * ";
+        $sql .= "FROM `exercise_instances` ei ";
+        $sql .= "JOIN `exercise` e ON e.id = ei.exercise_id ";
+        $sql .= "WHERE ei.day_id =:day_id ";
+        $sql .= "ORDER BY `order`";
+        $exercise_statement = $connection->prepare($sql);
+        $exercise_statement->bindParam(':day_id', $day_id, PDO::PARAM_INT);
+        $exercise_statement->execute();
+        $exercise_result = $exercise_statement->fetchAll();
+        return $exercise_result;
+    } catch
+    (PDOException $error) {
+        echo '<script>console.log("' . $error->getMessage() . '")</script>';
+    }
+
+}
+
 
 function delete_workout($connection, $plan_id)
 {
