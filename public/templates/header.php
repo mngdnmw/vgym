@@ -34,8 +34,6 @@ if (!isset($page_title)) {
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
-<!--    <!-- Bootstrap -->-->
-<!--    <link rel="stylesheet" href="css/custom-theme/jquery-ui-1.9.2.custom.css">-->
 
 
     <title><?php echo $page_title; ?></title>

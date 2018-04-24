@@ -1,8 +1,7 @@
 $(document).ready(function () {
-    $( function() {
-        $( "#datepicker" ).datepicker();
-    } );
 
+    $("#successfully-created-alert").hide();
+    $("#failed-create-alert").hide();
 
     $(document).on('click', '#add-new-day', function () {
         window.console && console.log('foo');
@@ -11,22 +10,6 @@ $(document).ready(function () {
     $(document).on('click', '#create-submit', function () {
         event.preventDefault();
         submitForm();
-
-    });
-
-    $( "#popup" ).dialog({
-        modal: true,
-        autoOpen: false,
-        height: 255,
-        width: 300,
-        buttons: {
-            "Retrieve": function() {
-                document.forms["forgotform"].submit();
-            },
-            Cancel: function() {
-                $( this ).dialog( "close" );
-            }
-        },
     });
 
     function submitForm() {
@@ -41,39 +24,40 @@ $(document).ready(function () {
         if (wname == '' || wdesc == '' || wdiff == '' || ename == '' || edur == '' || dname == '') {
             alert("Please fill all fields!");
         } else {
-            $( function() {
-                $( "#dialog" ).dialog();
-            } );
-
-
-            // $.ajax({
-            //     url: '../ajax.php',
-            //     type: 'POST',
-            //     data: {
-            //         'create': 1,
-            //         'wname': wname,
-            //         'wdesc': wdesc,
-            //         'wdiff': wdiff,
-            //         'dname': dname,
-            //         'ename': ename,
-            //         'edur': edur,
-            //     },
-            //     success: function (response) {
-            //         $('#wname').val('');
-            //         $('#wdesc').val('');
-            //         $('#wdiff').val('');
-            //         $('#dname').val('');
-            //         $('#ename').val('');
-            //         $('#edur').val('');
-            //         $("#popup").dialog("open");
-            //         //window.location='thank-you.html'
-            //     }
-            // });
+            $.ajax({
+                url: '../private/ajax.php',
+                type: 'POST',
+                data: {
+                    'create': 1,
+                    'wname': wname,
+                    'wdesc': wdesc,
+                    'wdiff': wdiff,
+                    'dname': dname,
+                    'ename': ename,
+                    'edur': edur,
+                },
+                success: function (response) {
+                    $('#wname').val('');
+                    $('#wdesc').val('');
+                    $('#wdiff').val('');
+                    $('#dname').val('');
+                    $('#ename').val('');
+                    $('#edur').val('');
+                    $("#create-submit").hide();
+                    $("#successfully-created-alert").fadeTo(2000, 1000).slideUp(1000, function () {
+                        $("#successfully-created-alert").slideUp('close');
+                        $("#create-submit").show();
+                    });
+                },
+                error: function (response) {
+                    $("#create-submit").hide();
+                    $("#failed-create-alert").fadeTo(2000, 1000).slideUp(1000, function () {
+                        $("#failed-create-alert").slideUp('close');
+                        $("#create-submit").show();
+                    });
+                }
+            });
         }
 
-    }
-
-    function formSuccess() {
-        $("#msgSubmit").removeClass("hidden");
     }
 });
