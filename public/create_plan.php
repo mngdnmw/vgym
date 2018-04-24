@@ -73,12 +73,5 @@ $connection = new PDO($dsn, $username, $password, $options);
             </form>
         </div>
     </main>
-    <div class="alert alert-primary" id="successfully-created-alert">
-        <button type="button" class="close" data-dismiss="alert">x</button>
-        <strong>Success!</strong> <br /> You have successfully created a workout!
-    </div>
-    <div class="alert alert-danger" id="failed-create-alert">
-        <button type="button" class="close" data-dismiss="alert">x</button>
-        <strong>Error!</strong> <br /> Could not process your request, please try again!
-    </div>
+
 <?php include TEMPLATE_PATH . '/footer.php'; ?>

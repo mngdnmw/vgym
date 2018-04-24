@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
-    $("#successfully-created-alert").hide();
-    $("#failed-create-alert").hide();
+    $("#successful-alert").hide();
+    $("#failed-alert").hide();
 
     $(document).on('click', '#add-new-day', function () {
         window.console && console.log('foo');
@@ -22,7 +22,13 @@ $(document).ready(function () {
         var edur = $("#edur").val();
 
         if (wname == '' || wdesc == '' || wdiff == '' || ename == '' || edur == '' || dname == '') {
-            alert("Please fill all fields!");
+            $(".alert-message").text("Input is required for each field!");
+            $("#create-submit").hide();
+            $("#failed-alert").fadeTo(3000, 1000).slideUp(1000, function () {
+                $("#failed-alert").slideUp('close');
+                $("#create-submit").show();
+            });
+
         } else {
             $.ajax({
                 url: '../private/ajax.php',
@@ -44,15 +50,15 @@ $(document).ready(function () {
                     $('#ename').val('');
                     $('#edur').val('');
                     $("#create-submit").hide();
-                    $("#successfully-created-alert").fadeTo(2000, 1000).slideUp(1000, function () {
+                    $("#successfully-alert").fadeTo(2000, 1000).slideUp(1000, function () {
                         $("#successfully-created-alert").slideUp('close');
                         $("#create-submit").show();
                     });
                 },
                 error: function (response) {
                     $("#create-submit").hide();
-                    $("#failed-create-alert").fadeTo(2000, 1000).slideUp(1000, function () {
-                        $("#failed-create-alert").slideUp('close');
+                    $("#failed-alert").fadeTo(2000, 1000).slideUp(1000, function () {
+                        $("#failed-alert").slideUp('close');
                         $("#create-submit").show();
                     });
                 }
