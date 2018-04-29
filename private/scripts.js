@@ -2,17 +2,42 @@ $(document).ready(function () {
 
     $("#successful-alert").hide();
     $("#failed-alert").hide();
+    $("#new-day-form").hide();
+    $("#form-excerise").hide();
+
+    $(document).on('click', '#btn-create-exercise', function () {
+        $("#form-excerise").show();
+
+
+    });
+
 
     $(document).on('click', '#add-new-day', function () {
-        window.console && console.log('foo');
+        // window.console && console.log('foo');
+        $("#new-day-form").show();
+
+
     });
 
-    $(document).on('click', '#create-submit', function () {
+    $(document).on('click', '#create-day-submit', function () {
+
         event.preventDefault();
-        submitForm();
+        submitCreateDayForm();
+
     });
 
-    function submitForm() {
+
+    function submitCreateDayForm() {
+
+    }
+
+    $(document).on('click', '#create-plan-submit', function () {
+        event.preventDefault();
+        submitCreatePlanForm();
+    });
+
+
+    function submitCreatePlanForm() {
         // Initiate Variables With Form Content
         var wname = $("#wname").val();
         var wdesc = $("#wdesc").val();
@@ -66,4 +91,39 @@ $(document).ready(function () {
         }
 
     }
+
+    $('#pageModal').on('show.bs.modal', function (event) {
+        var btnDelete = $(event.relatedTarget);
+        var planId = btnDelete.data('id');
+        var modal = $(this);
+        modal.find('.modal-body').text("Are you sure you want to delete this plan?");
+        modal.find('#btn-confirm').click(function () {
+            modal.hide();
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+            console.log("GETS IN HERR");
+            $.ajax({
+                url: '../private/ajax.php',
+                type: 'POST',
+                data: {
+                    'delete': 1,
+                    'id': planId,
+                },
+                success: function (response) {
+                    $(".alert-message").text("Plan successfully deleted!");
+                    $("#successfully-alert").fadeTo(2000, 1000).slideUp(1000, function () {
+                        $("#successfully-created-alert").slideUp('close');
+                        $("#create-submit").show();
+                    });
+                },
+                error: function (response) {
+                    $(".alert-message").text("Ooops...something went wrong, please try again!");
+                    $("#failed-alert").fadeTo(2000, 1000).slideUp(1000, function () {
+                        $("#failed-alert").slideUp('close');
+                    });
+                }
+            });
+        });
+
+    });
 });

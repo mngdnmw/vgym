@@ -71,31 +71,6 @@ function get_exercise_instances($connection, $day_id)
 }
 
 
-function delete_workout($connection, $plan_id)
-{
-    try {
-
-        $sql = "DELETE p, pd ";
-        $sql .= "FROM `plan` p ";
-        $sql .= "JOIN `plan_days` pd ON pd.plan_id = p.id ";
-        $sql .= "WHERE p.id =:plan_id;";
-        $delete_statement = $connection->prepare($sql);
-        $delete_statement->bindParam(':plan_id', $plan_id, PDO::PARAM_INT);
-        $delete_statement->execute();
-        $count = $delete_statement->rowCount();
-        if ($count > 0) {
-            return true;
-        } else {
-            return false;
-        }
-
-    } catch (PDOException $error) {
-        echo '<script>console.log("' . $error->getMessage() . '")</script>';
-    }
-
-
-}
-
 function get_all_exercises($connection){
 
     $sql = "SELECT * ";

@@ -7,17 +7,17 @@ include TEMPLATE_PATH . '/header.php';
 include PRIVATE_PATH . '/query_functions.php';
 
 $connection = new PDO($dsn, $username, $password, $options);
-
-if (isset($_POST['delete'])) {
-
-    $plan_id = $_POST['id'];
-    if (delete_workout($connection, $plan_id)) {
-        echo "<script type='text/javascript'>alert('Plan successfully deleted');</script>";
-    } else {
-        echo "<script type='text/javascript'>alert('PPlan could not be deleted');</script>";
-    }
-
-}
+//
+//if (isset($_POST['delete'])) {
+//
+//    $plan_id = $_POST['id'];
+//    if (delete_workout($connection, $plan_id)) {
+//        echo "<script type='text/javascript'>alert('Plan successfully deleted');</script>";
+//    } else {
+//        echo "<script type='text/javascript'>alert('PPlan could not be deleted');</script>";
+//    }
+//
+//}
 ?>
 
 <header>
@@ -49,13 +49,14 @@ if (isset($_POST['delete'])) {
                             <p><b><i>Plan difficulty:</i></b> <?php echo $plan_row["plan_difficulty"]; ?>
                             </p>
                             <div class="row button-row">
-                                <form method="post">
-                                    <input type="hidden" value="<?php echo $plan_row["id"]; ?>"
-                                           name="id">
-                                    <button type="submit"
+                                <form>
+                                    <input type="hidden">
+                                    <button type="button"
                                             name="delete"
                                             class="btn btn-warning btn-sm"
-                                            onclick="return confirm('Are you sure you want to delete this plan?')">
+                                            data-toggle="modal"
+                                            data-target="#pageModal"
+                                            data-id="@<?php echo $plan_row["id"]; ?>">
                                         <i class="fas fa-trash"></i></button>
                                 </form>
                                 <form>

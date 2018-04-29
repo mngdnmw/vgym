@@ -65,7 +65,7 @@ $connection = new PDO($dsn, $username, $password, $options);
                 </div>
                 <div class="float-right">
                     <button type="submit"
-                            id="create-submit"
+                            id="create-plan-submit"
                             class="btn btn-success">
                         <i class="fas fa-check"></i> Submit
                     </button>

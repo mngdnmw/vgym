@@ -29,12 +29,32 @@ if (isset($_POST['create'])) {
         $statement->bindParam(':ename', $ename, PDO::PARAM_STR);
         $statement->bindParam(':edur', $edur, PDO::PARAM_INT);
 
-
         $statement->execute();
         $result = $statement->fetchAll();
 
     } catch (PDOException $error) {
         echo '<script>console.log("' . $error->getMessage() . '")</script>';
     }
+}
+
+
+if (isset($_POST['delete'])) {
+    try {
+
+
+        $sql = "DELETE p, pd ";
+        $sql .= "FROM `plan` p ";
+        $sql .= "JOIN `plan_days` pd ON pd.plan_id = p.id ";
+        $sql .= "WHERE p.id =:plan_id;";
+        $delete_statement = $connection->prepare($sql);
+        $delete_statement->bindParam(':plan_id', $plan_id, PDO::PARAM_INT);
+        $delete_statement->execute();
+        $count = $delete_statement->rowCount();
+
+    } catch (PDOException $error) {
+        echo '<script>console.log("' . $error->getMessage() . '")</script>';
+    }
+
+
 }
 ?>
