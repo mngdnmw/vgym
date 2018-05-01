@@ -5,7 +5,7 @@ if (!$connection) {
     die('Connection failed');
 }
 
-if (isset($_POST['create'])) {
+if (isset($_POST['createWorkout'])) {
     try {
         $wname = $_POST['wname'];
         $wdesc = $_POST['wdesc'];
@@ -38,18 +38,37 @@ if (isset($_POST['create'])) {
 }
 
 
-if (isset($_POST['delete'])) {
+if (isset($_POST['deleteWorkout'])) {
+
     try {
+        $plan_id = $_POST['id'];
 
+        /* Checks to see if the workout plan has any days */
+        $sql = "SELECT COUNT(*) FROM `plan` p JOIN `plan_days` pd ON pd.`plan_id` = p.`id` WHERE p.`id` = =:plan_id";
+        $statement = $connection->prepare($sql);
+        $statement->bindParam(':plan_id', $plan_id, PDO::PARAM_INT);
 
-        $sql = "DELETE p, pd ";
-        $sql .= "FROM `plan` p ";
-        $sql .= "JOIN `plan_days` pd ON pd.plan_id = p.id ";
-        $sql .= "WHERE p.id =:plan_id;";
-        $delete_statement = $connection->prepare($sql);
-        $delete_statement->bindParam(':plan_id', $plan_id, PDO::PARAM_INT);
-        $delete_statement->execute();
-        $count = $delete_statement->rowCount();
+        if ($statement->fetchColumn() > 0) {
+
+            /* Delete from both plan and plan_days table */
+            $sql = "DELETE p, pd ";
+            $sql .= "FROM `plan` p ";
+            $sql .= "JOIN `plan_days` pd ON pd.`plan_id` = p.`id` ";
+            $sql .= "WHERE p.`id` =:plan_id;";
+            $delete_statement = $connection->prepare($sql);
+            $delete_statement->bindParam(':plan_id', $plan_id, PDO::PARAM_INT);
+            $delete_statement->execute();
+
+        } /* No rows matched -- only delete from plan table */
+        else {
+            $sql = "DELETE FROM `plan`";
+            $sql .= "WHERE `plan`.`id` =:plan_id ";
+            $sql .= "LIMIT 1";
+            $delete_statement = $connection->prepare($sql);
+            $delete_statement->bindParam(':plan_id', $plan_id, PDO::PARAM_INT);
+            $delete_statement->execute();
+        }
+
 
     } catch (PDOException $error) {
         echo '<script>console.log("' . $error->getMessage() . '")</script>';

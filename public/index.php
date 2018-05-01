@@ -56,7 +56,7 @@ $connection = new PDO($dsn, $username, $password, $options);
                                             class="btn btn-warning btn-sm"
                                             data-toggle="modal"
                                             data-target="#pageModal"
-                                            data-id="@<?php echo $plan_row["id"]; ?>">
+                                            data-id="<?php echo $plan_row["id"]; ?>">
                                         <i class="fas fa-trash"></i></button>
                                 </form>
                                 <form>

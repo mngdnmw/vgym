@@ -59,7 +59,7 @@ $(document).ready(function () {
                 url: '../private/ajax.php',
                 type: 'POST',
                 data: {
-                    'create': 1,
+                    'createWorkout': 1,
                     'wname': wname,
                     'wdesc': wdesc,
                     'wdiff': wdiff,
@@ -67,7 +67,7 @@ $(document).ready(function () {
                     'ename': ename,
                     'edur': edur,
                 },
-                success: function (response) {
+                success: function () {
                     $('#wname').val('');
                     $('#wdesc').val('');
                     $('#wdiff').val('');
@@ -75,12 +75,14 @@ $(document).ready(function () {
                     $('#ename').val('');
                     $('#edur').val('');
                     $("#create-submit").hide();
-                    $("#successfully-alert").fadeTo(2000, 1000).slideUp(1000, function () {
-                        $("#successfully-created-alert").slideUp('close');
+                    $("#successful-alert").fadeTo(2000, 1000).slideUp(1000, function () {
+                        $("#successful-alert").slideUp('close');
                         $("#create-submit").show();
                     });
+                    setTimeout(function(){location.reload();},100);
                 },
                 error: function (response) {
+                    window.console && console.log(response);
                     $("#create-submit").hide();
                     $("#failed-alert").fadeTo(2000, 1000).slideUp(1000, function () {
                         $("#failed-alert").slideUp('close');
@@ -101,22 +103,28 @@ $(document).ready(function () {
             modal.hide();
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
-            console.log("GETS IN HERR");
             $.ajax({
                 url: '../private/ajax.php',
                 type: 'POST',
                 data: {
-                    'delete': 1,
+                    'deleteWorkout': 1,
                     'id': planId,
                 },
-                success: function (response) {
-                    $(".alert-message").text("Plan successfully deleted!");
-                    $("#successfully-alert").fadeTo(2000, 1000).slideUp(1000, function () {
-                        $("#successfully-created-alert").slideUp('close');
-                        $("#create-submit").show();
+                success: function () {
+
+                   location.reload();
+
+                    $(window).load(function() {
+                        $(".alert-message").text("Plan successfully deleted!");
+                        $("#successful-alert").fadeTo(2000, 1000).slideUp(1000, function () {
+                            $("#successful-alert").slideUp('close');
+                            $("#create-submit").show();
+                        });
                     });
+
                 },
                 error: function (response) {
+                    window.console && console.log(response);
                     $(".alert-message").text("Ooops...something went wrong, please try again!");
                     $("#failed-alert").fadeTo(2000, 1000).slideUp(1000, function () {
                         $("#failed-alert").slideUp('close');
